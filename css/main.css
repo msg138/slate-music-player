@@ -42,11 +42,13 @@
 	width: 35%;
 	
 	float: left;
+	margin-top: 10px;
 }
 .songinfo-detail {
 	float: left;
 	width: 63%;
 	margin-left: 10px;
+	margin-top: 10px;
 }
 .player-functions {
 	text-align: center;
@@ -58,6 +60,7 @@
 	padding-bottoM: 12px;
 	
 	font-family: 'Livvic', sans-serif;
+	font-size: 24px;
 }
 .player-functions i {
 	margin-right: 20px;

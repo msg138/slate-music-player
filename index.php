@@ -28,18 +28,19 @@
 			<!-- Music selection menu -->
 			<div class='player-musiclist col-sm-4'>
 				<ul>
-					<li class='musiclist-option'>Test - Test</li>
-					<li class='musiclist-option'>Test - Test</li>
-					<li class='musiclist-option'>Test - Test</li>
+					<li class='musiclist-option' 
+						v-for="song in songList"
+						v-on:click="loadSongDetails(song)">{{ song }} </li>
 				</ul>
 			</div>
 			<!-- Song Information / Album Art -->
 			<div class='player-songinfo col-sm-8'>
 				<img class='songinfo-image' src='img/blank-album.jpg' title='Album Art'/>
-				<span class='songinfo-detail'>Song Name</span><br/>
-				<span class='songinfo-detail'>Album Name</span><br/>
-				<span class='songinfo-detail'>File Size</span><br/>
-				<span class='songinfo-detail'>Duration</span><br/>
+				<span class='songinfo-detail'>File Name: {{ currentSongData.filename }}</span><br/>
+				<span class='songinfo-detail'>Song Name: </span><br/>
+				<span class='songinfo-detail'>Album Name: </span><br/>
+				<span class='songinfo-detail'>File Size: {{ currentSongData.filesize / 1024 / 1024 - ((currentSongData.filesize / 1024 / 1024)%1) }} Mb</span><br/>
+				<span class='songinfo-detail'>Duration: {{ currentSongData.playtime_string }}</span><br/>
 			</div>
 		</div>
 		<div class='row'>
