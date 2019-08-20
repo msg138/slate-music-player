@@ -14,7 +14,8 @@ var g_app = new Vue({
 		},
 		// Keep track of local confiruation settings. 
 		config: {
-			musicDir: undefined
+			musicDir: undefined,
+			autoPlay: true
 		},
 		
 		nowPlaying: undefined,
@@ -63,11 +64,30 @@ var g_app = new Vue({
 			this.nowPlaying.pause();
 		},
 		
+		playPreviousSong() {
+			let t_newIndex = this.songList.indexOf(this.nowPlaying.src.substr(this.nowPlaying.src.lastIndexOf('/') + 1)) - 1;
+			if(t_newIndex < 0)
+				t_newIndex = this.songList.length - 1;
+			this.playNewSong(this.songList[t_newIndex]);
+		},
+		
+		playNextSong() {
+			let t_newIndex = this.songList.indexOf(this.nowPlaying.src.substr(this.nowPlaying.src.lastIndexOf('/') + 1)) + 1;
+			if(t_newIndex >= this.songList.length)
+				t_newIndex = 0;
+			this.playNewSong(this.songList[t_newIndex]);
+		},
+		
 		updateTimeRatio(){
 			if(this.nowPlaying == undefined)
 				this.nowPlayingTimeRatio = 0;
-			else
+			else {
 				this.nowPlayingTimeRatio = (this.nowPlaying.currentTime / this.nowPlaying.duration) * 100;
+				
+				if(this.nowPlaying.ended && this.config.autoPlay) {
+					this.playNextSong();
+				}
+			}
 		}
 	},
 	
@@ -76,6 +96,9 @@ var g_app = new Vue({
 		
 		callAPI('config&o=musicDir', (a_d) => {
 			this.config.musicDir = a_d['data'];
+		});
+		callAPI('config&o=autoPlay', (a_d) => {
+			this.config.autoPlay = a_d['data'] == 'true';
 		});
 		
 		c_updateTimer = setInterval(this.updateTimeRatio, 500);

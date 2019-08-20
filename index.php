@@ -48,12 +48,12 @@
 			<!-- Music Player functions -->
 			<div class='player-functions col-sm-12'>
 				<!-- Previous Button -->
-				<i class='fa fa-step-backward'></i>
+				<i class='fa fa-step-backward button' v-on:click="playPreviousSong"></i>
 				<!-- Play / Pause Button -->
 				<i class='fa fa-play button' v-if='nowPlayingTimeRatio == 0 || nowPlaying.paused' v-on:click="continuePlaying"></i>
 				<i class='fa fa-pause button' v-if='nowPlayingTimeRatio != 0 && !nowPlaying.paused' v-on:click="pauseCurrentSong"></i>
 				<!-- Next Button -->
-				<i class='fa fa-step-forward'></i>
+				<i class='fa fa-step-forward button' v-on:click="playNextSong"></i>
 				<!-- Seeker -->
 				<i class='player-seeker-bar-back'></i>
 				<i class='player-seeker-bar' :style="{ width: nowPlayingTimeRatio + '%'}">
