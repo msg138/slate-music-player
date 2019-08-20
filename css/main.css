@@ -84,6 +84,11 @@
 	top: -7px;
 	left: 100%;
 }
+.volume-slider {
+	width: 100px;
+	left: 20%;
+	position: absolute;
+}
 
 .button:hover {
 	cursor: pointer;

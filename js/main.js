@@ -19,7 +19,9 @@ var g_app = new Vue({
 		},
 		
 		nowPlaying: undefined,
-		nowPlayingTimeRatio: 0
+		nowPlayingTimeRatio: 0,
+		
+		preferredVolume: 50.0,
 	},
 	methods: {
 		updateSongs(a_data) {
@@ -55,6 +57,9 @@ var g_app = new Vue({
 			}
 			this.nowPlaying = new Audio(this.config.musicDir + a_songname);
 			this.nowPlaying.load();
+			
+			this.updateVolume();
+			
 			this.nowPlaying.play();
 		},
 		continuePlaying() {
@@ -88,6 +93,17 @@ var g_app = new Vue({
 					this.playNextSong();
 				}
 			}
+		},
+		
+		updateVolume() {
+			if(this.nowPlaying != undefined)
+				this.nowPlaying.volume = this.preferredVolume / 100;
+		}
+	},
+	
+	watch: {
+		'preferredVolume': function(val){
+			this.updateVolume();
 		}
 	},
 	
