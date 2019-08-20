@@ -24,6 +24,17 @@
 				$r_response = ['data' => array_diff($t_filesList, array('..', '.'))];
 			}
 			break;
+		case 'info':
+			// Get song information based on 's' being the song file name.
+			if(!isset($_GET['s'])) 
+				$r_response = ['error' => ['code' => 3, 'message' => 'No song / filename specified.']];
+			else {
+				// Use the getid3 library to obtain information.
+				require_once('./getid3/getid3.php');
+				$getID3 = new getID3;
+				$r_response = ['data' => $getID3->analyze($g_config['settings']['musicDir'].$_GET['s'])];
+			}
+			break;
 		default:
 			// Was not handled.
 			break;

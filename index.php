@@ -2,6 +2,7 @@
 <head>
 	<!-- Credits For Used Assets
 		Blank Album - BRRT at Pixabay <https://pixabay.com/photos/blank-vinyl-record-jacket-record-2924018/>
+		getid3 Functionality - James Heinrigh <https://github.com/JamesHeinrich/getID3>
 	-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +18,7 @@
 <body>
 	
 	<!-- Main app container -->
-	<div class='container'>
+	<div class='container' id="vue-app">
 		<div class='row'>
 			<div class='player-quickinfo col-sm-12'>
 				Currently playing: Test - Test
