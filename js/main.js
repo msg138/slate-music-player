@@ -1,3 +1,6 @@
+
+var c_updateTimer = undefined;
+
 var g_app = new Vue({
 	el: '#vue-app',
 	data: {
@@ -8,8 +11,14 @@ var g_app = new Vue({
 		songData: {},
 		// Keep track of current details
 		currentSongData: {
-			
-		}
+		},
+		// Keep track of local confiruation settings. 
+		config: {
+			musicDir: undefined
+		},
+		
+		nowPlaying: undefined,
+		nowPlayingTimeRatio: 0
 	},
 	methods: {
 		updateSongs(a_data) {
@@ -37,11 +46,39 @@ var g_app = new Vue({
 				this.songData[a_data['data']['filename']] = a_data['data'];
 				this.currentSongData = this.songData[a_data['data']['filename']];
 			}
+		},
+		
+		playNewSong(a_songname) {
+			if(this.nowPlaying != undefined) {
+				this.nowPlaying.pause();
+			}
+			this.nowPlaying = new Audio(this.config.musicDir + a_songname);
+			this.nowPlaying.load();
+			this.nowPlaying.play();
+		},
+		continuePlaying() {
+			this.nowPlaying.play();
+		},
+		pauseCurrentSong() {
+			this.nowPlaying.pause();
+		},
+		
+		updateTimeRatio(){
+			if(this.nowPlaying == undefined)
+				this.nowPlayingTimeRatio = 0;
+			else
+				this.nowPlayingTimeRatio = (this.nowPlaying.currentTime / this.nowPlaying.duration) * 100;
 		}
 	},
 	
 	beforeMount(){
-		getSongList(this.updateSongs)
+		getSongList(this.updateSongs);
+		
+		callAPI('config&o=musicDir', (a_d) => {
+			this.config.musicDir = a_d['data'];
+		});
+		
+		c_updateTimer = setInterval(this.updateTimeRatio, 500);
 	}
 });
 

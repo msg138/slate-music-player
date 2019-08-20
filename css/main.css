@@ -57,11 +57,34 @@
 	color: #F7F0F0;
 	
 	padding-top: 10px;
-	padding-bottoM: 12px;
+	padding-bottoM: 20px;
 	
 	font-family: 'Livvic', sans-serif;
 	font-size: 24px;
 }
 .player-functions i {
 	margin-right: 20px;
+}
+.player-seeker-bar, .player-seeker-bar-back {
+	position: absolute;
+	left: 0;
+	top: 52px;
+	width: 50%;
+	height: 3px;
+	
+	background-color: #F7F0F0;
+}
+.player-seeker-bar-back {
+	width: 100%;
+	background-color: #08090A;
+}
+.player-seeker-endpoint {
+	position: absolute;
+	font-size: 16px;
+	top: -7px;
+	left: 100%;
+}
+
+.button:hover {
+	cursor: pointer;
 }

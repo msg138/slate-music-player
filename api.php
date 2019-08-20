@@ -35,6 +35,14 @@
 				$r_response = ['data' => $getID3->analyze($g_config['settings']['musicDir'].$_GET['s'])];
 			}
 			break;
+		case 'config':
+			// Get a configuration option specified in config.ini
+			if(!isset($_GET['o']))
+				$r_response = ['error' => ['code' => 4, 'message' => 'No config option specified.']];
+			else {
+				$r_response = ['data' => $g_config['settings'][$_GET['o']]];
+			}
+			break;
 		default:
 			// Was not handled.
 			break;

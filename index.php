@@ -21,7 +21,7 @@
 	<div class='container' id="vue-app">
 		<div class='row'>
 			<div class='player-quickinfo col-sm-12'>
-				Currently playing: Test - Test
+				Currently playing: {{ nowPlaying == undefined ? 'N / A' : nowPlaying.src.substr(nowPlaying.src.lastIndexOf('/') + 1) }}
 			</div>
 		</div>
 		<div class='row'>
@@ -41,6 +41,7 @@
 				<span class='songinfo-detail'>Album Name: </span><br/>
 				<span class='songinfo-detail'>File Size: {{ currentSongData.filesize / 1024 / 1024 - ((currentSongData.filesize / 1024 / 1024)%1) }} Mb</span><br/>
 				<span class='songinfo-detail'>Duration: {{ currentSongData.playtime_string }}</span><br/>
+				<span class='songinfo-detail button' v-on:click="playNewSong(currentSongData.filename)">Play Now</span>
 			</div>
 		</div>
 		<div class='row'>
@@ -49,9 +50,15 @@
 				<!-- Previous Button -->
 				<i class='fa fa-step-backward'></i>
 				<!-- Play / Pause Button -->
-				<i class='fa fa-play'></i>
+				<i class='fa fa-play button' v-if='nowPlayingTimeRatio == 0 || nowPlaying.paused' v-on:click="continuePlaying"></i>
+				<i class='fa fa-pause button' v-if='nowPlayingTimeRatio != 0 && !nowPlaying.paused' v-on:click="pauseCurrentSong"></i>
 				<!-- Next Button -->
 				<i class='fa fa-step-forward'></i>
+				<!-- Seeker -->
+				<i class='player-seeker-bar-back'></i>
+				<i class='player-seeker-bar' :style="{ width: nowPlayingTimeRatio + '%'}">
+					<i class='player-seeker-endpoint fa fa-circle-o'></i>
+				</i>
 			</div>
 		</div>
 	</div>
