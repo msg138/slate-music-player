@@ -1,0 +1,64 @@
+/**
+	Color Scheme:
+		#08090A
+		#F7F0F0
+		#A7A2A9
+		#575A5E
+		#222823
+*/
+.player-quickinfo {
+	background-color: #575A5E;
+	color: #F7F0F0;
+	
+	position: relative;
+	margin-top: 5%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	
+	font-family: 'Livvic', sans-serif;
+}
+.player-musiclist {
+	background-color: #A7A2A9;
+	
+	position: relative;
+	height: 45vh;
+	
+	overflow-y: scroll;
+	
+	font-family: 'Livvic', sans-serif;
+}
+.musiclist-option {
+	list-style: none;
+}
+.musiclist-option:hover {
+	cursor: pointer;
+}
+.player-songinfo {
+	background-color: #A7A2A9;
+	
+	font-family: 'Livvic', sans-serif;
+}
+.songinfo-image {
+	width: 35%;
+	
+	float: left;
+}
+.songinfo-detail {
+	float: left;
+	width: 63%;
+	margin-left: 10px;
+}
+.player-functions {
+	text-align: center;
+	
+	background-color: #222823;
+	color: #F7F0F0;
+	
+	padding-top: 10px;
+	padding-bottoM: 12px;
+	
+	font-family: 'Livvic', sans-serif;
+}
+.player-functions i {
+	margin-right: 20px;
+}
