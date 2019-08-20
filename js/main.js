@@ -18,7 +18,7 @@ var g_app = new Vue({
 			autoPlay: true
 		},
 		
-		nowPlaying: undefined,
+		nowPlaying: {currentTime: 0, duration: 100, temp: true, src: 'N A'},
 		nowPlayingTimeRatio: 0,
 		
 		preferredVolume: 50.0,
@@ -52,7 +52,7 @@ var g_app = new Vue({
 		},
 		
 		playNewSong(a_songname) {
-			if(this.nowPlaying != undefined) {
+			if(this.nowPlaying != undefined && !this.nowPlaying.temp) {
 				this.nowPlaying.pause();
 			}
 			this.nowPlaying = new Audio(this.config.musicDir + a_songname);
@@ -63,10 +63,14 @@ var g_app = new Vue({
 			this.nowPlaying.play();
 		},
 		continuePlaying() {
-			this.nowPlaying.play();
+			if(this.nowPlaying != undefined && !this.nowPlaying.temp)
+				this.nowPlaying.play();
+			else if(this.currentSongData != undefined)
+				this.playNewSong(this.currentSongData.filename);
 		},
 		pauseCurrentSong() {
-			this.nowPlaying.pause();
+			if(this.nowPlaying != undefined && !this.nowPlaying.temp)
+				this.nowPlaying.pause();
 		},
 		
 		playPreviousSong() {

@@ -21,7 +21,7 @@
 	background-color: #A7A2A9;
 	
 	position: relative;
-	height: 45vh;
+	min-height: 45vh;
 	
 	overflow-y: scroll;
 	
@@ -65,28 +65,35 @@
 .player-functions i {
 	margin-right: 20px;
 }
-.player-seeker-bar, .player-seeker-bar-back {
+.player-seeker-bar {
 	position: absolute;
 	left: 0;
 	top: 52px;
-	width: 50%;
+	width: 100%;
 	height: 3px;
+	
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	
 	background-color: #F7F0F0;
 }
-.player-seeker-bar-back {
-	width: 100%;
-	background-color: #08090A;
+.player-seeker-bar::-webkit-slider-thumb, .player-seeker-bar::-moz-range-thumb {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 0px;
+	height: 0px;
 }
 .player-seeker-endpoint {
 	position: absolute;
 	font-size: 16px;
-	top: -7px;
-	left: 100%;
+	color: #e57e1d;
+	top: 45px;
 }
 .volume-slider {
 	width: 100px;
-	left: 20%;
+	left: 5%;
 	position: absolute;
 }
 

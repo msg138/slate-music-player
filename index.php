@@ -37,11 +37,11 @@
 			<div class='player-songinfo col-sm-8'>
 				<img class='songinfo-image' src='img/blank-album.jpg' title='Album Art'/>
 				<span class='songinfo-detail'>File Name: {{ currentSongData.filename }}</span><br/>
-				<span class='songinfo-detail'>Song Name: </span><br/>
-				<span class='songinfo-detail'>Album Name: </span><br/>
+				<span class='songinfo-detail'>Song Name: {{ (currentSongData.tags == undefined || currentSongData.tags.id3v2.title == undefined) ? 'N / A' : currentSongData.tags.id3v2.title[0] }}</span><br/>
+				<span class='songinfo-detail'>Album Name: {{ (currentSongData.tags == undefined || currentSongData.tags.id3v2.album == undefined) ? 'N / A' : currentSongData.tags.id3v2.album[0] }}</span><br/>
 				<span class='songinfo-detail'>File Size: {{ currentSongData.filesize / 1024 / 1024 - ((currentSongData.filesize / 1024 / 1024)%1) }} Mb</span><br/>
 				<span class='songinfo-detail'>Duration: {{ currentSongData.playtime_string }}</span><br/>
-				<span class='songinfo-detail button' v-on:click="playNewSong(currentSongData.filename)">Play Now</span>
+				<em class='songinfo-detail button' v-on:click="playNewSong(currentSongData.filename)">Play Now</em>
 			</div>
 		</div>
 		<div class='row'>
@@ -57,10 +57,8 @@
 				<!-- Volume Control -->
 				<input class='volume-slider' type="range" min="0" max="100" value="50" v-model="preferredVolume">
 				<!-- Seeker -->
-				<i class='player-seeker-bar-back'></i>
-				<i class='player-seeker-bar' :style="{ width: nowPlayingTimeRatio + '%'}">
-					<i class='player-seeker-endpoint fa fa-circle-o'></i>
-				</i>
+				<input class='player-seeker-bar' type="range" min="0" :max="nowPlaying.duration" value="0" v-model="nowPlaying.currentTime">
+				<i class='player-seeker-endpoint fa fa-circle-o' :style="{ left: (nowPlayingTimeRatio) + '%' }"></i>
 			</div>
 		</div>
 	</div>
