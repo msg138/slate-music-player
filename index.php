@@ -21,7 +21,7 @@
 	<div class='container' id="vue-app">
 		<div class='row'>
 			<div class='player-quickinfo col-sm-12'>
-				Currently playing: {{ nowPlaying == undefined ? 'N / A' : nowPlaying.src.substr(nowPlaying.src.lastIndexOf('/') + 1) }}
+				Currently playing: {{ nowPlayingSongName }}
 			</div>
 		</div>
 		<div class='row'>
@@ -30,6 +30,7 @@
 				<ul>
 					<li class='musiclist-option' 
 						v-for="song in songList"
+						:key="song"
 						v-on:click="loadSongDetails(song)">{{ song }} </li>
 				</ul>
 			</div>
@@ -50,8 +51,8 @@
 				<!-- Previous Button -->
 				<i class='fa fa-step-backward button' v-on:click="playPreviousSong"></i>
 				<!-- Play / Pause Button -->
-				<i class='fa fa-play button' v-if='nowPlayingTimeRatio == 0 || nowPlaying.paused' v-on:click="continuePlaying"></i>
-				<i class='fa fa-pause button' v-if='nowPlayingTimeRatio != 0 && !nowPlaying.paused' v-on:click="pauseCurrentSong"></i>
+				<i class='fa fa-play button' v-show='nowPlayingTimeRatio == 0 || nowPlaying.paused' v-on:click="continuePlaying"></i>
+				<i class='fa fa-pause button' v-show='nowPlayingTimeRatio != 0 && !nowPlaying.paused' v-on:click="pauseCurrentSong"></i>
 				<!-- Next Button -->
 				<i class='fa fa-step-forward button' v-on:click="playNextSong"></i>
 				<!-- Volume Control -->
