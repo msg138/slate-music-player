@@ -112,6 +112,7 @@ var global_app = new Vue({
 			let newIndex = this.nowPlayingIndex + 1;
 			if(newIndex >= this.songList.length)
 				newIndex = 0;
+			return newIndex;
 		},
 		nowPlayingSongName: function() {
 			return this.nowPlaying === undefined ? 'N / A' : this.nowPlaying.src.substr(this.nowPlaying.src.lastIndexOf('/') + 1);
